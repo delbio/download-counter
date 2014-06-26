@@ -42,3 +42,17 @@ All'interno del file cron
 
     # Alle 00:10 di ogni giorno conta i download dei prodotti monitorari es: (nome-app.apk , nome-app2.apk)
     10 00 * * * bash /home/user/download-counter/download_counter_per_day.sh /home/user/config.cfg "1 days ago"
+
+Visualizza risultato contatore:
+---------
+Visualizza i dowload giornalieri nella tabella associata al file:
+
+    mysql -u user -p
+    
+inserisci la password (db_pass) per l'utente db_user
+    
+    USE database_name
+    SHOW TABLES
+    SELECT * FROM table1;
+    SELECT * FROM table2;
+
