@@ -1,0 +1,38 @@
+# Intro e comandi base: Crud 
+https://www.digitalocean.com/community/tutorials/a-basic-mysql-tutorial
+
+mysql -u user-name -p
+
+SHOW DATABASES;
+
+CREATE DATABASE database-name;
+DROP DATABASE database-name;
+# Let's open up the database we whant to use
+USE events;
+SHOW TABLES;
+DESCRIBE potluck;
+# DATE need format: yyyy-mm-dd
+CREATE TABLE icaremobile (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, date DATE, download INT);
+SELECT * FROM potluck;
+# add new column to table in a specific position
+ALTER TABLE potluck ADD email VARCHAR(40) AFTER name;
+# remove column from table
+ALTER TABLE potluck DROP email;
+
+# Manage User And Permission
+https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+
+type_of_permission= {"ALL PRIVILEGES","CREATE","DROP","DELETE", "INSERT", "UPDATE", "GRANT OPTION"};
+# database name e table name can ad *
+GRANT [type of permission] ON [database name].[table name] TO ‘[username]’@'localhost’;
+
+# to grant multiple permission in one line
+GRANT UPDATE, SELECT ON [database name].[table name] TO ‘[username]’@‘localhost’;"
+
+REVOKE [type of permission] ON [database name].[table name] FROM ‘[username]’@‘localhost’;
+
+DROP USER ‘demo’@‘localhost’;
+# to finalyze the permission, reload all the privileges
+FLUSH PRIVILEGES;

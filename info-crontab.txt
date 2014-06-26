@@ -1,0 +1,14 @@
+# Guida
+http://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/
+
+# Automatizza inserimento di crontab via bash
+http://stackoverflow.com/questions/878600/how-to-create-cronjob-using-bash
+
+# Comando per lista cron
+crontab -l
+
+# Editare la lista di cron
+crontab -e
+
+# Alle 00:10 di ogni giorno conta i download dei prodotti monitorari es: (nome-app.apk , nome-app2.apk)
+10 00 * * * bash /home/user/download_counter_per_day.sh /home/user/config.cfg "1 days ago"
