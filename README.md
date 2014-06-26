@@ -1,9 +1,9 @@
-download-counter
+How to use
 ================
 
 Download Counter in Bash for small site
 
-How to Use:
+Creare il file di configurazione:
 ---------------------
 
 Definisci il file di configurazione per il contatore:
@@ -18,6 +18,22 @@ Definisci il file di configurazione per il contatore:
     in_table=“table1 table2”
 
 Salva i parametri in un file es: config.cfg
+
+Inizializzare il db:
+---------------
+
+    bash init_db.sh config.cfg init_db_file.sql
+
 esegui il seguente comando per controllare il numero di download dei file: file.txt, app.apk di ieri
 
     bash download_counter_per_day.sh config.cfg "1 days ago"
+
+Automatizzare il contatore via crontab:
+----------
+
+Editare la lista di cron
+    crontab -e
+
+All'interno del file cron
+    # Alle 00:10 di ogni giorno conta i download dei prodotti monitorari es: (nome-app.apk , nome-app2.apk)
+    10 00 * * * bash /home/user/download_counter_per_day.sh /home/user/config.cfg "1 days ago"
