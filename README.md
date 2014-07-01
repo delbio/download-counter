@@ -23,7 +23,7 @@ Inizializzare il db:
 ---------------
 
     cd init
-    bash init_db.sh config.cfg init_db_file.sql
+    bash init_db.sh ../config.cfg init_db_file.sql
 
 
 Come eseguire il contatore:

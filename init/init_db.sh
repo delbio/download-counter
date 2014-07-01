@@ -1,10 +1,25 @@
 #!/bin/bash
 
+set -e # exit on error
+
 # Load config file -- http://wiki.bash-hackers.org/howto/conffile
 configfile=${1}
 init_db_sql_file=${2}
 configfile_secured='/tmp/cool.cfg'
 
+if [ ! -e ${configfile} ]  # config file exist?
+then
+    echo "Error: ${configfile} not exist. Create it before"
+    echo "lock config-sample.cfg for an example"
+    exit
+fi
+
+if [ ! -w ${init_db_sql_file} ]  # is file writable?
+then
+    echo "Error: ${init_db_sql_file} is not writable."
+    echo "select another dir for file"
+    exit
+fi
 
 # check if the file contains something we don't want
 if egrep -q -v '^#|^[^ ]*=[^;]*' "$configfile"; then
@@ -53,20 +68,26 @@ echo "CREATE USER '${user}'@'localhost' IDENTIFIED BY '${user_pass}';" >> ${init
 echo "GRANT INSERT, UPDATE, DELETE, SELECT ON ${name_db}.* TO '${user}'@localhost’;" >> ${init_db_sql_file}
 echo "FLUSH PRIVILEGES;" >> ${init_db_sql_file}
 
-# get input from user
-# http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_08_02.html
+# http://stackoverflow.com/questions/592620/how-to-check-if-a-program-exists-from-a-bash-script
+if hash mysql 2>/dev/null; then
 
-echo  "You want to init db, tables and user to MySQL? type [Y/n] followed by [ENTER]: "
+    # get input from user
+    # http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_08_02.html
 
-read isYes
+    echo  "You want to init db, tables and user to MySQL? type [Y/n] followed by [ENTER]: "
 
-case "$isYes" in
-'Y')
-    echo "yes";
-    mysql -u ${user} --password=${user_pass} < ${init_db_sql_file} && rm ${init_db_sql_file}; 
-    ;;
-*)
-    #do_nothing;;
+    read isYes
 
-esac
+    case "$isYes" in
+    'Y')
+        echo "yes";
+        mysql -u ${user} --password=${user_pass} < ${init_db_sql_file} && rm ${init_db_sql_file}; 
+        ;;
+    *)
+        #do_nothing;;
+    esac
 
+else
+    echo "mysql not installed"
+    exit
+fi
