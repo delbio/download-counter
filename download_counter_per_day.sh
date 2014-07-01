@@ -1,9 +1,17 @@
 #!/bin/bash
 
+set -e # exit on error
+
 # Load config file -- http://wiki.bash-hackers.org/howto/conffile
 configfile=${1}
 configfile_secured='/tmp/cool.cfg'
 
+if [ ! -e ${configfile} ]  # config file exist?
+then
+    echo "Error: ${configfile} not exist. Create it before"
+    echo "look config-sample.cfg for an example"
+    exit
+fi
 
 # check if the file contains something we don't want
 if egrep -q -v '^#|^[^ ]*=[^;]*' "$configfile"; then
@@ -57,12 +65,27 @@ do
 
     # --- Salvataggio dei dati estratti nel db MySQL
     echo "save data in table "${table_names[$i-1]}
-    sh ${local_dir}/save_to_mysql_table.sh ${user} ${user_pass} ${name_db} ${table_names[$i-1]} ${date_format_sql} ${count}
+
+    # http://stackoverflow.com/questions/592620/how-to-check-if-a-program-exists-from-a-bash-script
+    if hash mysql 2>/dev/null; then
+
+        sh ${local_dir}/save_to_mysql_table.sh ${user} ${user_pass} ${name_db} ${table_names[$i-1]} ${date_format_sql} ${count}
+
+    else
+        echo "mysql not installed"
+    fi
 
     # --- Salvataggio dei dati in locale
     local_file=${local_dir}/${table_names[$i-1]}.csv
     echo "save data in local file: "${local_file}
-    echo ${date_format_sql}", "${count} >> ${local_file}
+
+    if [ ! -w ${local_file} ]  # is file writable?
+    then
+        echo ${date_format_sql}", "${count} >> ${local_file}
+    else
+        echo "Error: ${local_file} is not writable."
+        echo "select another dir for file"
+    fi
 done
 
 

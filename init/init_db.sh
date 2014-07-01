@@ -10,7 +10,7 @@ configfile_secured='/tmp/cool.cfg'
 if [ ! -e ${configfile} ]  # config file exist?
 then
     echo "Error: ${configfile} not exist. Create it before"
-    echo "lock config-sample.cfg for an example"
+    echo "look config-sample.cfg for an example"
     exit
 fi
 
