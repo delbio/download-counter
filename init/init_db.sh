@@ -62,11 +62,11 @@ read isYes
 
 case "$isYes" in
 'Y')
-    echo "yes";;
-    mysql -u ${user} --password=${user_pass} < ${init_db_sql_file} && rm ${init_db_sql_file} 
-    
+    echo "yes";
+    mysql -u ${user} --password=${user_pass} < ${init_db_sql_file} && rm ${init_db_sql_file}; 
+    ;;
 *)
-    #do_nothing;i ;
+    #do_nothing;;
 
 esac
 

@@ -22,6 +22,7 @@ Salva i parametri in un file es: config.cfg
 Inizializzare il db:
 ---------------
 
+    cd init
     bash init_db.sh config.cfg init_db_file.sql
 
 
