@@ -1,12 +1,21 @@
 #!/bin/bash
 
+min_args=1
+
+if (( $# < ${min_args} ))
+then
+    echo "Errore config fie needed"
+    echo "look config-sample.cfg for an example"
+    exit
+fi
+
 set -e # exit on error
 
 # Load config file -- http://wiki.bash-hackers.org/howto/conffile
 configfile=${1}
 configfile_secured='/tmp/cool.cfg'
 
-if [ ! -e ${configfile} ]  # config file exist?
+if [ ! -f ${configfile} ]  # config file exist?
 then
     echo "Error: ${configfile} not exist. Create it before"
     echo "look config-sample.cfg for an example"

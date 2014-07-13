@@ -1,3 +1,6 @@
-command="php $INSTALL/indefero/scripts/gitcron.php"
-job="5 0 * * 0 $command"
-cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
+actual_dir=$(pwd)
+command="bash $(dirname ${actual_dir})/download_counter_per_day.sh $1 \"1 days ago\""
+job="10 00 * * * ${command}"
+echo "$job"
+#cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
+crontab -l

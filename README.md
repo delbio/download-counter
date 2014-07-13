@@ -44,6 +44,11 @@ All'interno del file cron
     # Alle 00:10 di ogni giorno conta i download dei prodotti monitorari es: (nome-app.apk , nome-app2.apk)
     10 00 * * * bash /home/user/download-counter/download_counter_per_day.sh /home/user/config.cfg "1 days ago"
 
+in alternativa eseguire i seguenti comandi:
+
+    cd init
+    bash init_crontab.sh /absolute/path/config.cfg
+
 Visualizza risultato contatore:
 ---------
 Visualizza i dowload giornalieri nella tabella associata al file:
