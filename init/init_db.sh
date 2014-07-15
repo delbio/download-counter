@@ -2,6 +2,14 @@
 
 set -e # exit on error
 
+min_args=1
+
+if (( $# < ${min_args} ))
+then
+    echo "Error config.cfg file is needed"
+    exit
+fi
+
 # Load config file -- http://wiki.bash-hackers.org/howto/conffile
 configfile=${1}
 init_db_sql_file=${2}
