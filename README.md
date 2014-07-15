@@ -10,7 +10,6 @@ Definisci il file di configurazione per il contatore:
 
     access_log_dir=/var/log/apache2
     access_log_file=access_file_name.log
-    local_dir=/home/user/download-counter
     db_user=user
     db_pass=password
     db_name=database_name
@@ -39,7 +38,7 @@ E' possibile automatizzare la creazione del cronjob eseguento i seguenti comandi
     cd init
     bash init_crontab.sh /absolute/path/config.cfg
 
-Per effettuare manualmente l'inserimento di cronjob eseguire i seguenti passi:
+Per effettuare manualmente l'inserimento di un cronjob eseguire i seguenti passi:
 
 Editare la lista di cron
 
@@ -50,7 +49,7 @@ All'interno del file cron
     # Alle 00:10 di ogni giorno conta i download dei prodotti monitorari es: (nome-app.apk , nome-app2.apk)
     10 00 * * * cd /home/user/download-counter; bash download_counter_per_day.sh /home/user/config-sample.cfg "1 days ago"
 
-Visualizza risultato contatore:
+Visualizzare il risultato delle letture:
 ---------
 Visualizza i dowload giornalieri nella tabella associata al file:
 
