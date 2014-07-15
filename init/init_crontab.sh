@@ -18,5 +18,5 @@ actual_dir=$(pwd)
 command="cd $(dirname ${actual_dir}); bash download_counter_per_day.sh $config_file \"1 days ago\""
 job="10 00 * * * ${command}"
 echo "$job"
-#cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
+cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
 crontab -l

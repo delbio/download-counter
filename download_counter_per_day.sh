@@ -38,7 +38,6 @@ date_request=$(date +%d/%b/%Y --date="${date_row}")
 
 log_dir=$access_log_dir
 log_file_name=$access_log_file
-local_dir=$local_dir
 
 log_file=${log_dir}/${log_file_name}*
 
@@ -78,14 +77,14 @@ do
     # http://stackoverflow.com/questions/592620/how-to-check-if-a-program-exists-from-a-bash-script
     if hash mysql 2>/dev/null; then
 
-        sh ${local_dir}/save_to_mysql_table.sh ${user} ${user_pass} ${name_db} ${table_names[$i-1]} ${date_format_sql} ${count}
+        sh save_to_mysql_table.sh ${user} ${user_pass} ${name_db} ${table_names[$i-1]} ${date_format_sql} ${count}
 
     else
         echo "mysql not installed"
     fi
 
     # --- Salvataggio dei dati in locale
-    local_file=${local_dir}/${table_names[$i-1]}.csv
+    local_file=table_names[$i-1]}.csv
     echo "save data in local file: "${local_file}
 
     if [ ! -w ${local_file} ]  # is file writable?

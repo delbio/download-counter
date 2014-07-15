@@ -34,6 +34,12 @@ esegui il seguente comando per controllare il numero di download dei file: file.
 
 Automatizzare il contatore via crontab:
 ----------
+E' possibile automatizzare la creazione del cronjob eseguento i seguenti comandi:
+
+    cd init
+    bash init_crontab.sh /absolute/path/config.cfg
+
+Per effettuare manualmente l'inserimento di cronjob eseguire i seguenti passi:
 
 Editare la lista di cron
 
@@ -42,12 +48,7 @@ Editare la lista di cron
 All'interno del file cron
 
     # Alle 00:10 di ogni giorno conta i download dei prodotti monitorari es: (nome-app.apk , nome-app2.apk)
-    10 00 * * * bash /home/user/download-counter/download_counter_per_day.sh /home/user/config.cfg "1 days ago"
-
-in alternativa eseguire i seguenti comandi:
-
-    cd init
-    bash init_crontab.sh /absolute/path/config.cfg
+    10 00 * * * cd /home/user/download-counter; bash download_counter_per_day.sh /home/user/config-sample.cfg "1 days ago"
 
 Visualizza risultato contatore:
 ---------
